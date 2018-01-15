@@ -1,0 +1,6 @@
+---
+- name: Install utils
+  apt: name={{item}} state=installed
+  with_items:
+  - vim
+  - more
