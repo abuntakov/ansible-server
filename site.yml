@@ -7,4 +7,10 @@
   
   roles:
     - common-software
-    - nginx
+    # - nginx
+    - role: geerlingguy.java
+      java_packages:
+        - java-1.8.0-openjdk
+    - geerlingguy.elasticsearch
+    - geerlingguy.logstash
+    - geerlingguy.filebeat
