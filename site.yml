@@ -6,5 +6,5 @@
   # become_method: sudo
   
   roles:
-    # - common-software
+    - common-software
     - nginx

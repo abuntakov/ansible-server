@@ -54,26 +54,28 @@ nginx_extra_http_options: ""
 
 nginx_remove_default_vhost: true
 nginx_vhosts:
-  - listen: "443 ssl http2" # default: "80"
-    server_name: "example.com" # default: N/A
+  # - listen: "443 ssl http2" # default: "80"
+  #   server_name: "example.com" # default: N/A
+  - listen: "80"
+    server_name: "vm.local" # default: N/A
     root: "/var/www/example.com" # default: N/A
     index: "index.html index.htm" # default: "index.html index.htm"
     filename: "example.com.conf"
     template: "vhost.j2"
     state: "present" # To remove the vhost configuration.
     # Properties that are only added if defined:
-    extra_parameters: |
-      ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-      ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-      ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-      add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
-      ssl_ciphers ALL:!DH:!EXPORT:!RC4:+HIGH:+MEDIUM:!LOW:!aNULL:!eNULL;
-      ssl_session_cache shared:ssl_shared_cache_name:10m;
+  #   extra_parameters: |
+  #     ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+  #     ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+  #     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  #     add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
+  #     ssl_ciphers ALL:!DH:!EXPORT:!RC4:+HIGH:+MEDIUM:!LOW:!aNULL:!eNULL;
+  #     ssl_session_cache shared:ssl_shared_cache_name:10m;
 
-  - listen: "80"
-    server_name: "example.com www.example.com"
-    return: "301 https://example.com$request_uri"
-    filename: "example.com.80.conf"
+  # - listen: "80"
+  #   server_name: "example.com www.example.com"
+  #   return: "301 https://example.com$request_uri"
+  #   filename: "example.com.80.conf"
 
 nginx_upstreams: []
 # - name: myapp1
