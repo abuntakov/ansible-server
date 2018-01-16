@@ -1,5 +1,5 @@
 ---
-- name: Install Nginx
+- name: Install ELK-stack
   hosts: vm-servers
   remote_user: root
   # become: yes

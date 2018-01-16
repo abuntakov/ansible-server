@@ -3,3 +3,7 @@ elasticsearch_network_host: localhost
 elasticsearch_http_port: 9200
 elasticsearch_script_inline: true
 elasticsearch_script_indexed: true
+elasticsearch_path_logs:  /var/log/elasticsearch
+elasticsearch_path_data: /var/data/elasticsearch
+elasticsearch_user: elasticsearch
+elasticsearch_group: elasticsearch

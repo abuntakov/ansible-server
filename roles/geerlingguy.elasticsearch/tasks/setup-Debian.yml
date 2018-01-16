@@ -9,9 +9,19 @@
 
 - name: Add Elasticsearch repository.
   apt_repository:
-    repo: 'deb https://packages.elastic.co/elasticsearch/2.x/debian stable main'
+    repo: 'deb https://artifacts.elastic.co/packages/6.x/apt stable main'
     state: present
     update_cache: yes
 
 - name: Install Elasticsearch.
   apt: pkg=elasticsearch state=present
+
+- name: Create dirs for Elasticsearch
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ elasticsearch_user }}"
+    group: "{{ elasticsearch_group }}"
+  with_items:
+    - "{{ elasticsearch_path_logs }}"
+    - "{{ elasticsearch_path_data }}"
