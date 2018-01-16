@@ -4,9 +4,12 @@
     url: https://packages.elastic.co/GPG-KEY-elasticsearch
     state: present
 
+- name: Install transport-https.
+  apt: pkg=apt-transport-https state=present
+
 - name: Add Elasticsearch repository.
   apt_repository:
-    repo: 'deb http://packages.elastic.co/elasticsearch/2.x/debian stable main'
+    repo: 'deb https://packages.elastic.co/elasticsearch/2.x/debian stable main'
     state: present
     update_cache: yes
 

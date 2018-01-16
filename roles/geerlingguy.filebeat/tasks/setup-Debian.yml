@@ -7,6 +7,9 @@
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
 
+- name: Install transport-https.
+  apt: pkg=apt-transport-https state=present
+
 - name: Add Filebeat repository.
   apt_repository:
     repo: 'deb https://artifacts.elastic.co/packages/6.x/apt stable main'
