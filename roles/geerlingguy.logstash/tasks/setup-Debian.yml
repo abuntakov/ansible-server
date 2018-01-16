@@ -1,8 +1,11 @@
 ---
 - name: Add Elasticsearch apt key.
   apt_key:
-    url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
+
+- name: Install transport-https.
+  apt: pkg=apt-transport-https state=present
 
 - name: Add Logstash repository.
   apt_repository:
