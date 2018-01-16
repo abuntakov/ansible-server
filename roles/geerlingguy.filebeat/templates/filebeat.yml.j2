@@ -3,6 +3,15 @@ filebeat:
   prospectors:
     {{ filebeat_prospectors | to_json }}
 
+  filebeat.modules:
+    - module: nginx
+      access:
+        enabled: true
+        var.paths: ["/var/log/nginx/access.log*"]
+      error:
+        enabled: true
+        var.paths: ["/var/log/nginx/error.log*"]
+
 # Configure what outputs to use when sending the data collected by the beat.
 # Multiple outputs may be used.
 output:
