@@ -3,7 +3,7 @@ filebeat:
   prospectors:
     {{ filebeat_prospectors | to_json }}
 
-  filebeat.modules:
+  modules:
     - module: nginx
       access:
         enabled: true
@@ -107,7 +107,7 @@ output:
     #worker: 1
 
     # Optional load balance the events between the Logstash hosts
-    #loadbalance: true
+    #loadbalance: truemodul
 
     # Optional index name. The default index name depends on the each beat.
     # For Packetbeat, the default is set to packetbeat, for Topbeat
