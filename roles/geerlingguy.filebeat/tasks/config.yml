@@ -20,7 +20,7 @@
     dest: "{{ filebeat_ssl_dir }}/{{ item | basename }}"
     mode: 0644
   with_items:
-    - "{{ filebeat_ssl_key_file }}"
-    - "{{ filebeat_ssl_certificate_file }}"
+    - "{{ playbook_dir }}/{{ filebeat_ssl_key_file }}"
+    - "{{ playbook_dir }}/{{ filebeat_ssl_certificate_file }}"
   notify: restart filebeat
   when: filebeat_ssl_key_file and filebeat_ssl_certificate_file
