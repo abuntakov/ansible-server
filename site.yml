@@ -11,5 +11,5 @@
     - geerlingguy.java
     - geerlingguy.elasticsearch
     - geerlingguy.logstash
-    - geerlingguy.filebeat
-    - geerlingguy.kibana
+#    - geerlingguy.filebeat
+    -geerlingguy.kibana

@@ -5,13 +5,27 @@
     state: directory
   when: logstash_ssl_key_file != ""
 
-- name: Copy SSL key and cert for logstash-forwarder.
-  copy:
-    src: "{{ item }}"
-    dest: "{{ logstash_ssl_dir }}/{{ item | basename }}"
-    mode: 0644
+- name: Check if Logstash public cert installed
+  stat: path={{ logstash_ssl_dir }}/{{ logstash_ssl_default_key_file }}
+  register: logstash_public_cert_installed
+
+- name: Generate SSL key if missing
+  command: "{{ item }}"
   with_items:
-    - "{{ playbook_dir }}/{{ logstash_ssl_key_file }}"
-    - "{{ playbook_dir }}/{{ logstash_ssl_certificate_file }}"
-  notify: restart logstash
-  when: logstash_ssl_key_file != ""
+    - openssl req -x509 -nodes -newkey rsa:2048 -days 3650 -keyout {{ logstash_ssl_dir }}/{{ logstash_ssl_default_key_file }} -out {{ logstash_ssl_dir }}/{{ logstash_ssl_certificate_file }} -subj /CN={{ inventory_hostname }}
+    - openssl pkcs8 -in {{ logstash_ssl_dir }}/{{ logstash_ssl_default_key_file }} -topk8 -nocrypt -out {{ logstash_ssl_dir }}/{{ logstash_ssl_key_file }}
+    - chmod 644 {{ logstash_ssl_dir }}/{{ logstash_ssl_key_file }}
+  when: logstash_public_cert_installed.stat.exists == false
+
+
+
+#- name: Copy SSL key and cert for logstash-forwarder.
+#  copy:
+#    src: "certs/{{ item }}"
+#    dest: "{{ logstash_ssl_dir }}/{{ item | basename }}"
+#    mode: 0644
+#  with_items:
+#    - "{{ logstash_ssl_key_file }}"
+#    - "{{ logstash_ssl_certificate_file }}"
+#  notify: restart logstash
+#  when: logstash_ssl_key_file != ""
