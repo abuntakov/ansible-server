@@ -12,4 +12,4 @@
     - geerlingguy.elasticsearch
     - geerlingguy.logstash
 #    - geerlingguy.filebeat
-    -geerlingguy.kibana
+    - geerlingguy.kibana

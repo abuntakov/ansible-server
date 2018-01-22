@@ -20,6 +20,23 @@
     mode: 0644
   with_items:
     - 11-nginx.conf
+    - 12-log4j.conf
+  notify: restart logstash
+
+- name: Ensure Logstash patterns directory exists.
+  file:
+    path: "{{ logstash_patterns_dir }}"
+    state: directory
+
+- name: Create Logstash patterns.
+  copy:
+    src: "patterns/{{ item }}"
+    dest: "{{ logstash_patterns_dir }}/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - java
   notify: restart logstash
 
 # - name: Create Logstash configuration file for local syslog.
