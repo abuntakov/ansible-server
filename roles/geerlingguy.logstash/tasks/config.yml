@@ -21,6 +21,7 @@
   with_items:
     - 11-nginx.conf
     - 12-log4j.conf
+    - 13-postgresql.conf
   notify: restart logstash
 
 - name: Ensure Logstash patterns directory exists.
